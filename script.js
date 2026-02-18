@@ -1,22 +1,65 @@
+function addSubject() {
+    const container = document.getElementById("inputs-container");
+    const count = container.querySelectorAll("input").length + 1;
+
+    const input = document.createElement("input");
+    input.type = "number";
+    input.placeholder = `Enter Marks ${count}`;
+    container.appendChild(input);
+}
+
+function removeSubject() {
+    const container = document.getElementById("inputs-container");
+    const inputs = container.querySelectorAll("input");
+    if (inputs.length > 1) {
+        container.removeChild(inputs[inputs.length - 1]);
+    }
+}
+
 function calculateGrade() {
-    let m1 = parseFloat(document.getElementById("m1").value);
-    let m2 = parseFloat(document.getElementById("m2").value);
-    let m3 = parseFloat(document.getElementById("m3").value);
+    const inputs = document.querySelectorAll("#inputs-container input");
+    let totalMarks = 0;
+    let subjectsCount = 0;
 
-    let total = m1 + m2 + m3;
-    let average = total / 3;
-    let grade = "";
+    inputs.forEach(input => {
+        const value = Number(input.value);
+        if (value || value === 0) { 
+            totalMarks += value;
+            subjectsCount++;
+        }
+    });
 
-    if (average >= 90) {
-        grade = "A";
-    } else if (average >= 75) {
-        grade = "B";
-    } else if (average >= 50) {
-        grade = "C";
-    } else {
-        grade = "Fail";
+    if (subjectsCount === 0) {
+        document.getElementById("result").innerText = "Please enter at least one mark!";
+        document.getElementById("result").className = "";
+        return;
     }
 
-    document.getElementById("result").innerHTML =
-        "Average: " + average + "<br>Grade: " + grade;
+    const percentage = (totalMarks / (subjectsCount * 100)) * 100;
+
+    let grade = "";
+    let gradeClass = "";
+
+    if (percentage >= 90) { grade = "A+"; gradeClass = "grade-A+"; }
+    else if (percentage >= 80) { grade = "A"; gradeClass = "grade-A"; }
+    else if (percentage >= 70) { grade = "B"; gradeClass = "grade-B"; }
+    else if (percentage >= 60) { grade = "C"; gradeClass = "grade-C"; }
+    else if (percentage >= 50) { grade = "D"; gradeClass = "grade-D"; }
+    else { grade = "F"; gradeClass = "grade-F"; }
+
+    const resultElement = document.getElementById("result");
+    resultElement.innerText =
+        `Subjects Counted: ${subjectsCount}\nPercentage: ${percentage.toFixed(2)}%\nGrade: ${grade}`;
+    resultElement.className = gradeClass;
+}
+
+function resetCalculator() {
+    const container = document.getElementById("inputs-container");
+    container.innerHTML = `
+        <input type="number" placeholder="Enter Marks 1">
+        <input type="number" placeholder="Enter Marks 2">
+        <input type="number" placeholder="Enter Marks 3">
+    `;
+    document.getElementById("result").innerText = "";
+    document.getElementById("result").className = "";
 }
