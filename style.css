@@ -1,26 +1,110 @@
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: Arial;
-    background-color: #f4f4f4;
-    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .container {
-    background: white;
-    padding: 20px;
-    margin: 100px auto;
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px green;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    transition: transform 0.3s;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 24px;
 }
 
 input {
     display: block;
-    margin: 10px auto;
-    padding: 8px;
     width: 80%;
+    margin: 10px auto;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+    outline: none;
 }
 
 button {
-    padding: 8px 15px;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 14px;
     cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    white-space: pre-line;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Color-coded grades */
+.grade-A+ { color: #2e7d32; }  /* Dark Green */
+.grade-A  { color: #388e3c; }
+.grade-B  { color: #f9a825; }  /* Amber */
+.grade-C  { color: #f57c00; }  /* Orange */
+.grade-D  { color: #e65100; }  /* Dark Orange */
+.grade-F  { color: #b71c1c; }  /* Red */
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+
+    input {
+        width: 90%;
+        padding: 10px;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    #result {
+        font-size: 16px;
+    }
 }
