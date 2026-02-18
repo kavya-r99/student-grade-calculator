@@ -8,17 +8,18 @@
 
 <div class="container">
     <h2>Student Grade Calculator</h2>
-    
-    <input type="number" id="m1" placeholder="Enter Marks 1">
-    <input type="number" id="m2" placeholder="Enter Marks 2">
-    <input type="number" id="m3" placeholder="Enter Marks 3">
-    <input type="number" id="m3" placeholder="Enter Marks 4">
-    <input type="number" id="m3" placeholder="Enter Marks 5">
 
+    <div id="inputs-container">
+        <input type="number" placeholder="Enter Marks 1">
+        <input type="number" placeholder="Enter Marks 2">
+        <input type="number" placeholder="Enter Marks 3">
+    </div>
 
-    
+    <button onclick="addSubject()">Add Subject</button>
+    <button onclick="removeSubject()">Remove Subject</button>
     <button onclick="calculateGrade()">Calculate</button>
-    
+    <button onclick="resetCalculator()">Reset</button>
+
     <h3 id="result"></h3>
 </div>
 
