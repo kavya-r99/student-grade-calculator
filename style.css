@@ -1,110 +1,102 @@
-{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+function addSubject() {
+    const container = document.getElementById("inputs-container");
+    const count = container.querySelectorAll("input").length + 1;
+
+    const input = document.createElement("input");
+    input.type = "number";
+    input.placeholder = `Enter Marks ${count}`;
+    container.appendChild(input);
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #89f7fe, #66a6ff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.container {
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-    transition: transform 0.3s;
-}
-
-.container:hover {
-    transform: translateY(-5px);
-}
-
-h2 {
-    color: #333;
-    margin-bottom: 25px;
-    font-size: 24px;
-}
-
-input {
-    display: block;
-    width: 80%;
-    margin: 10px auto;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    transition: border 0.3s, box-shadow 0.3s;
-}
-
-input:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
-    outline: none;
-}
-
-button {
-    padding: 12px 20px;
-    margin: 5px;
-    border-radius: 10px;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-}
-
-button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-}
-
-#result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    white-space: pre-line;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-/* Color-coded grades */
-.grade-A+ { color: #2e7d32; }  /* Dark Green */
-.grade-A  { color: #388e3c; }
-.grade-B  { color: #f9a825; }  /* Amber */
-.grade-C  { color: #f57c00; }  /* Orange */
-.grade-D  { color: #e65100; }  /* Dark Orange */
-.grade-F  { color: #b71c1c; }  /* Red */
-
-@media (max-width: 480px) {
-    .container {
-        padding: 20px;
-    }
-
-    input {
-        width: 90%;
-        padding: 10px;
-    }
-
-    button {
-        padding: 10px 15px;
-        font-size: 13px;
-    }
-
-    h2 {
-        font-size: 20px;
-    }
-
-    #result {
-        font-size: 16px;
+function removeSubject() {
+    const container = document.getElementById("inputs-container");
+    const inputs = container.querySelectorAll("input");
+    if (inputs.length > 1) {
+        container.removeChild(inputs[inputs.length - 1]);
     }
 }
+
+function calculateGrade() {
+    const inputs = document.querySelectorAll("#inputs-container input");
+    let totalMarks = 0;
+    let subjectsCount = 0;
+
+    inputs.forEach(input => {
+        const value = Number(input.value);
+        if (value || value === 0) { 
+            totalMarks += value;
+            subjectsCount++;
+        }
+    });
+
+    if (subjectsCount === 0) {
+        document.getElementById("result").innerText = "Please enter at least one mark!";
+        document.getElementById("result").className = "";
+        return;
+    }
+    const totalMaxMarks = Number(document.getElementById("totalMaxMarks").value);
+
+if (!totalMaxMarks) {
+    document.getElementById("result").innerText = "Please enter total maximum marks!";
+    document.getElementById("result").className = "";
+    return;
+}
+
+if (totalMarks > totalMaxMarks) {
+    document.getElementById("result").innerText = "Scored marks cannot exceed total maximum marks!";
+    document.getElementById("result").className = "";
+    return;
+}
+
+const percentage = (totalMarks / totalMaxMarks) * 100;
+    let grade = "";
+    let gradeClass = "";
+
+    if (percentage >= 90) { grade = "A+"; gradeClass = "grade-A+"; }
+    else if (percentage >= 80) { grade = "A"; gradeClass = "grade-A"; }
+    else if (percentage >= 70) { grade = "B"; gradeClass = "grade-B"; }
+    else if (percentage >= 60) { grade = "C"; gradeClass = "grade-C"; }
+    else if (percentage >= 50) { grade = "D"; gradeClass = "grade-D"; }
+    else { grade = "F"; gradeClass = "grade-F"; }
+
+    const resultElement = document.getElementById("result");
+    resultElement.innerText =
+        `Subjects Counted: ${subjectsCount}\nPercentage: ${percentage.toFixed(2)}%\nGrade: ${grade}`;
+    resultElement.className = gradeClass;
+}
+
+function resetCalculator() {
+    const container = document.getElementById("inputs-container");
+    container.innerHTML = `
+        <input type="number" placeholder="Enter Marks 1">
+        <input type="number" placeholder="Enter Marks 2">
+        <input type="number" placeholder="Enter Marks 3">
+    `;
+    document.getElementById("result").innerText = "";
+    document.getElementById("result").className = "";
+}
+function calculateTotal() {
+    const inputs = document.querySelectorAll("#inputs-container input");
+    let totalMarks = 0;
+    let subjectsCount = 0;
+
+    inputs.forEach(input => {
+        const value = Number(input.value);
+        if (value || value === 0) {
+            totalMarks += value;
+            subjectsCount++;
+        }
+    });
+
+    if (subjectsCount === 0) {
+        document.getElementById("result").innerText = "Please enter at least one mark!";
+        document.getElementById("result").className = "";
+        return;
+    }
+
+    const resultElement = document.getElementById("result");
+    resultElement.innerText =
+        `Subjects Counted: ${subjectsCount}\nTotal Marks: ${totalMarks}`;
+    resultElement.className = "";
+}
+
