@@ -1,3 +1,4 @@
+
 function addSubject() {
     const container = document.getElementById("inputs-container");
     const count = container.querySelectorAll("input").length + 1;
