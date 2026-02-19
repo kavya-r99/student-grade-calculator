@@ -107,4 +107,9 @@ button:hover {
         font-size: 16px;
     }
 }
+.grade-A+, .grade-A, .grade-B, .grade-C, .grade-D, .grade-F {
+    font-size: 40px !important;
+}
+
+
 
