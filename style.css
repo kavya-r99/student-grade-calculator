@@ -77,7 +77,7 @@ button:hover {
     border-radius: 10px;
 }
 
-.grade-A+ { color: #2e7d32; }  /* Dark Green */
+.grade-A\+ { color: #2e7d32; }  /* Dark Green */
 .grade-A  { color: #388e3c; }
 .grade-B  { color: #f9a825; }  /* Amber */
 .grade-C  { color: #f57c00; }  /* Orange */
@@ -107,3 +107,4 @@ button:hover {
         font-size: 16px;
     }
 }
+
